@@ -1,105 +1,163 @@
-# robomimic
+# Adaptive Vision-Torque Fusion for Contact-Aware Manipulation
 
-<p align="center">
-  <img width="24.0%" src="docs/images/task_lift.gif">
-  <img width="24.0%" src="docs/images/task_can.gif">
-  <img width="24.0%" src="docs/images/task_tool_hang.gif">
-  <img width="24.0%" src="docs/images/task_square.gif">
-  <img width="24.0%" src="docs/images/task_lift_real.gif">
-  <img width="24.0%" src="docs/images/task_can_real.gif">
-  <img width="24.0%" src="docs/images/task_tool_hang_real.gif">
-  <img width="24.0%" src="docs/images/task_transport.gif">
- </p>
+learning contact-aware robot manipulation policies from demonstration for adaptive vision-torque fusion. This project is implemented based on [robomimic](https://github.com/ARISE-Initiative/robomimic) with force/torque sensing integration, multi-modal fusion strategies.
 
-[**[Homepage]**](https://robomimic.github.io/) &ensp; [**[Documentation]**](https://robomimic.github.io/docs/introduction/overview.html) &ensp; [**[Study Paper]**](https://arxiv.org/abs/2108.03298) &ensp; [**[Study Website]**](https://robomimic.github.io/study/) &ensp; [**[ARISE Initiative]**](https://github.com/ARISE-Initiative)
+## Features
 
--------
-## Latest Updates
-- [06/20/2025] **v0.5.0**: Diffusion Policy, multi-dataset training, language-conditioned policies, and more! 
-- [03/11/2025] **v0.4.0**: support for [robosuite v1.5](https://github.com/ARISE-Initiative/robosuite/tree/v1.5.1) and migrate robomimic datasets to HuggingFace
-- [10/11/2023] **v0.3.1**: support for extracting, training on, and visualizing depth observations for robosuite datasets
-- [07/03/2023] **v0.3.0**: BC-Transformer and IQL :brain:, support for DeepMind MuJoCo bindings :robot:, pre-trained image reps :eye:, wandb logging :chart_with_upwards_trend:, and more
-- [05/23/2022] **v0.2.1**: Updated website and documentation to feature more tutorials :notebook_with_decorative_cover:
-- [12/16/2021] **v0.2.0**: Modular observation modalities and encoders :wrench:, support for [MOMART](https://sites.google.com/view/il-for-mm/home) datasets :open_file_folder: [[release notes]](https://github.com/ARISE-Initiative/robomimic/releases/tag/v0.2.0) [[documentation]](https://robomimic.github.io/docs/v0.2/introduction/overview.html)
-- [08/09/2021] **v0.1.0**: Initial code and paper release
+- **Adaptive vision-torque fusion** — learn when to rely on visual input vs. force/torque feedback for contact-rich tasks
+- **Multiple fusion strategies** — composition, gating, and auxiliary-task-based approaches for combining vision and force modalities
+- **Real robot deployment** — end-to-end pipeline from data collection to policy deployment on UR5e and Franka R3 robots
+- **Diffusion policy backbone** — built on top of diffusion policy for expressive multi-modal action distributions
+- **Rich data processing tools** — utilities for syncing multi-modal data, weight compensation, depth-color alignment, and point cloud processing
 
--------
+## Installation (AI generated not verified yet)
 
-## Colab quickstart
-Get started with a quick colab notebook demo of robomimic without installing anything locally.
+```bash
+git clone https://github.com/<your-org>/robomimic-suite.git
+cd robomimic-suite/robomimic
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1b62r_km9pP40fKF0cBdpdTO2P_2eIbC6?usp=sharing)
+# Create conda environment
+conda create -n robomimic python=3.10
+conda activate robomimic
 
-
--------
-
-**robomimic** is a framework for robot learning from demonstration.
-It offers a broad set of demonstration datasets collected on robot manipulation domains and offline learning algorithms to learn from these datasets.
-**robomimic** aims to make robot learning broadly *accessible* and *reproducible*, allowing researchers and practitioners to benchmark tasks and algorithms fairly and to develop the next generation of robot learning algorithms.
-
-## Core Features
-
-<p align="center">
-  <img width="50.0%" src="docs/images/core_features.png">
- </p>
-
-<!-- **Standardized Datasets**
-- Simulated and real-world tasks
-- Multiple environments and robots
-- Diverse human-collected and machine-generated datasets
-
-**Suite of Learning Algorithms**
-- Imitation Learning algorithms (BC, BC-RNN, HBC)
-- Offline RL algorithms (BCQ, CQL, IRIS, TD3-BC)
-
-**Modular Design**
-- Low-dim + Visuomotor policies
-- Diverse network architectures
-- Support for external datasets
-
-**Flexible Workflow**
-- Hyperparameter sweep tools
-- Dataset visualization tools
-- Generating new datasets -->
-
-
-## Reproducing benchmarks
-
-The robomimic framework also makes reproducing the results from different benchmarks and datasets easy. See the [datasets page](https://robomimic.github.io/docs/datasets/overview.html) for more information on downloading datasets and reproducing experiments.
-
-## Docker
-
-You can use the `Dockerfile` to easily build a containerized environment for setting up robomimic with Python 3.9, Miniconda, robosuite, and PyTorch (CPU/GPU support).
-
-To build, run:
-`docker build -t robomimic .`
-
-To run without GPU (CPU only), run:
-`docker run -it robomimic`
-
-To run with GPU (if available), run:
-`docker run --gpus all -it robomimic`
-
-## Troubleshooting
-
-Please see the [troubleshooting](https://robomimic.github.io/docs/miscellaneous/troubleshooting.html) section for common fixes, or [submit an issue](https://github.com/ARISE-Initiative/robomimic/issues) on our github page.
-
-## Contributing to robomimic
-This project is part of the broader [Advancing Robot Intelligence through Simulated Environments (ARISE) Initiative](https://github.com/ARISE-Initiative), with the aim of lowering the barriers of entry for cutting-edge research at the intersection of AI and Robotics.
-The project originally began development in late 2018 by researchers in the [Stanford Vision and Learning Lab](http://svl.stanford.edu/) (SVL).
-Now it is actively maintained and used for robotics research projects across multiple labs.
-We welcome community contributions to this project.
-For details please check our [contributing guidelines](https://robomimic.github.io/docs/miscellaneous/contributing.html).
-
-## Citation
-
-Please cite [this paper](https://arxiv.org/abs/2108.03298) if you use this framework in your work:
-
-```bibtex
-@inproceedings{robomimic2021,
-  title={What Matters in Learning from Offline Human Demonstrations for Robot Manipulation},
-  author={Ajay Mandlekar and Danfei Xu and Josiah Wong and Soroush Nasiriany and Chen Wang and Rohun Kulkarni and Li Fei-Fei and Silvio Savarese and Yuke Zhu and Roberto Mart\'{i}n-Mart\'{i}n},
-  booktitle={Conference on Robot Learning (CoRL)},
-  year={2021}
-}
+# Install the package
+pip install -e .
 ```
+
+## Quick Start
+
+### Training
+
+**Train a diffusion policy with vision + force/torque on UR5e data:**
+
+```bash
+python robomimic/scripts/train_real_robot.py \
+    --config robomimic/exps/templates/diffusion_policy_vision_force_ur5e.json \
+    --dataset /path/to/synced_data_10hz.hdf5 \
+    --name ur5e_vision_force_experiment
+```
+
+**Train a vision-only policy on Franka R3 data:**
+
+```bash
+python robomimic/scripts/train_real_robot.py \
+    --config robomimic/exps/templates/diffusion_policy_vision_only_franka.json \
+    --dataset /path/to/franka_demos.hdf5 \
+    --name franka_vision_only
+```
+
+**Train with fusion strategies:**
+
+```bash
+# Gating-based fusion (learned gate between vision and force)
+python robomimic/scripts/train_real_robot.py \
+    --config robomimic/exps/templates/diffusion_policy_vision_force_gating.json \
+    --dataset /path/to/dataset.hdf5
+
+# Composition-based fusion
+python robomimic/scripts/train_real_robot.py \
+    --config robomimic/exps/templates/diffusion_policy_vision_force_composition.json \
+    --dataset /path/to/dataset.hdf5
+```
+
+**Quick debug run (small number of epochs/steps):**
+
+```bash
+python robomimic/scripts/train_real_robot.py \
+    --config robomimic/exps/templates/diffusion_policy_vision_force_ur5e.json \
+    --dataset /path/to/dataset.hdf5 \
+    --debug
+```
+
+Training outputs are saved to:
+
+```
+<experiment_name>/<timestamp>/
+├── config.json           # Full config snapshot
+├── logs/
+│   ├── log.txt           # Terminal output
+│   └── tb/               # TensorBoard logs
+├── models/
+│   ├── last.pth          # Latest checkpoint
+│   └── best_rollout_success_rate.pth
+└── videos/               # Rollout videos (if enabled)
+```
+
+Monitor training with TensorBoard:
+
+```bash
+tensorboard --logdir <experiment_name>/<timestamp>/logs/tb
+```
+
+### Real Robot Inference
+
+**Deploy a trained policy on a UR5e robot:**
+
+```bash
+python robomimic/scripts/run_policy_real_robot.py \
+    --agent /path/to/best_rollout_success_rate.pth \
+    --robot_ip 10.125.145.89 \
+    --horizon 400
+```
+
+**Deploy with observation saving (for debugging and data collection):**
+
+```bash
+python robomimic/scripts/run_policy_real_robot.py \
+    --agent /path/to/model.pth \
+    --robot_ip 10.125.145.89 \
+    --horizon 400 \
+    --save_obs \
+    --obs_save_dir ./rollout_logs
+```
+
+### Data Processing
+
+**Convert synchronized sensor data to robomimic HDF5 format:**
+
+```bash
+python robomimic/scripts/data_processing/synced_data_to_robotmimic.py \
+    --input_dir /path/to/raw_synced_data \
+    --output /path/to/dataset.hdf5
+```
+
+**Visualize a dataset:**
+
+```bash
+python robomimic/scripts/data_processing/visualize_robomimic_dataset.py \
+    --dataset /path/to/dataset.hdf5
+```
+
+## Config Templates
+
+Pre-configured experiment templates are provided in `robomimic/exps/templates/`:
+
+| Template | Description |
+|----------|-------------|
+| `diffusion_policy_vision_force_ur5e.json` | Vision + force/torque for UR5e |
+| `diffusion_policy_vision_force_fanka.json` | Vision + force/torque for Franka R3 |
+| `diffusion_policy_vision_only_franka.json` | Vision-only for Franka R3 |
+| `diffusion_policy_vision_force_gating.json` | Gating-based fusion |
+| `diffusion_policy_vision_force_composition.json` | Composition-based fusion |
+| `diffusion_policy_vision_force_aux.json` | Auxiliary task fusion |
+| `diffusion_policy_pointcloud.json` | Point cloud input |
+
+Task-specific configs are available under `egg_boiler/`, `water_bottle/`, `usb_insertion/`, and `twisty_connector/` subdirectories.
+
+## Supported Algorithms
+
+| Algorithm | Description |
+|-----------|-------------|
+| BC | Behavioral Cloning |
+| Diffusion Policy | Denoising diffusion for action generation |
+| BCQ | Batch-Constrained Q-Learning |
+| CQL | Conservative Q-Learning |
+| IQL | Implicit Q-Learning |
+| TD3-BC | TD3 + Behavioral Cloning |
+| GL | Goal Learning |
+| HBC | Hierarchical BC |
+| IRIS | Implicit Reinforcement without Interaction at Scale |
+
+## Acknowledgements
+
+This project is built on top of [robomimic](https://github.com/ARISE-Initiative/robomimic), a modular framework for robot learning from demonstration developed by the [ARISE Initiative](https://arise-initiative.org/) at Stanford University. We thank the robomimic team for providing a well-structured and extensible codebase.
