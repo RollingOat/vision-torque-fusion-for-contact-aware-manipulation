@@ -1,0 +1,20 @@
+from robomimic.config.config import Config
+from robomimic.config.base_config import config_factory, get_all_registered_configs
+
+# note: these imports are needed to register these classes in the global config registry
+from robomimic.config.bc_config import BCConfig
+from robomimic.config.bcq_config import BCQConfig
+from robomimic.config.cql_config import CQLConfig
+from robomimic.config.iql_config import IQLConfig
+from robomimic.config.gl_config import GLConfig
+from robomimic.config.hbc_config import HBCConfig
+from robomimic.config.iris_config import IRISConfig
+from robomimic.config.td3_bc_config import TD3_BCConfig
+from robomimic.config.diffusion_policy_config import DiffusionPolicyConfig
+from robomimic.config.diffusion_policy_aux_config import DiffusionPolicyAuxConfig
+from robomimic.config.diffusion_policy_gating_config import DiffusionPolicyGatingConfig
+from robomimic.config.diffusion_policy_composition_config import DiffusionPolicyCompositionConfig
+from robomimic.config.diffusion_policy_composition_v2_config import DiffusionPolicyCompositionV2Config
+from robomimic.config.diffusion_policy_plus_config import DiffusionPolicyPlusConfig
+from robomimic.config.diffusion_policy_gated_composition_config import DiffusionPolicyGatedCompositionConfig
+from robomimic.config.diffusion_policy_gated_weighted_composition_config import DiffusionPolicyGatedWeightedCompositionConfig
