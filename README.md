@@ -2,23 +2,15 @@
 
 learning contact-aware robot manipulation policies from demonstration for adaptive vision-torque fusion. This project is implemented based on [robomimic](https://github.com/ARISE-Initiative/robomimic) with force/torque sensing integration, multi-modal fusion strategies.
 
-## Features
 
-- **Adaptive vision-torque fusion** — learn when to rely on visual input vs. force/torque feedback for contact-rich tasks
-- **Multiple fusion strategies** — composition, gating, and auxiliary-task-based approaches for combining vision and force modalities
-- **Real robot deployment** — end-to-end pipeline from data collection to policy deployment on UR5e and Franka R3 robots
-- **Diffusion policy backbone** — built on top of diffusion policy for expressive multi-modal action distributions
-- **Rich data processing tools** — utilities for syncing multi-modal data, weight compensation, depth-color alignment, and point cloud processing
-
-## Installation (AI generated not verified yet)
+## Installation 
 
 ```bash
-git clone https://github.com/<your-org>/robomimic-suite.git
-cd robomimic-suite/robomimic
-
+git clone https://github.com/RollingOat/vision-torque-fusion-for-contact-aware-manipulation.git
+cd vision-torque-fusion-for-contact-aware-manipulation
 # Create conda environment
-conda create -n robomimic python=3.10
-conda activate robomimic
+conda create -n adaptive_vision_torque_fusion python=3.10
+conda activate adaptive_vision_torque_fusion
 
 # Install the package
 pip install -e .
@@ -28,45 +20,11 @@ pip install -e .
 
 ### Training
 
-**Train a diffusion policy with vision + force/torque on UR5e data:**
+**Train a diffusion policy:**
 
 ```bash
 python robomimic/scripts/train_real_robot.py \
-    --config robomimic/exps/templates/diffusion_policy_vision_force_ur5e.json \
-    --dataset /path/to/synced_data_10hz.hdf5 \
-    --name ur5e_vision_force_experiment
-```
-
-**Train a vision-only policy on Franka R3 data:**
-
-```bash
-python robomimic/scripts/train_real_robot.py \
-    --config robomimic/exps/templates/diffusion_policy_vision_only_franka.json \
-    --dataset /path/to/franka_demos.hdf5 \
-    --name franka_vision_only
-```
-
-**Train with fusion strategies:**
-
-```bash
-# Gating-based fusion (learned gate between vision and force)
-python robomimic/scripts/train_real_robot.py \
-    --config robomimic/exps/templates/diffusion_policy_vision_force_gating.json \
-    --dataset /path/to/dataset.hdf5
-
-# Composition-based fusion
-python robomimic/scripts/train_real_robot.py \
-    --config robomimic/exps/templates/diffusion_policy_vision_force_composition.json \
-    --dataset /path/to/dataset.hdf5
-```
-
-**Quick debug run (small number of epochs/steps):**
-
-```bash
-python robomimic/scripts/train_real_robot.py \
-    --config robomimic/exps/templates/diffusion_policy_vision_force_ur5e.json \
-    --dataset /path/to/dataset.hdf5 \
-    --debug
+    --config path/to/config.json
 ```
 
 Training outputs are saved to:
@@ -144,19 +102,6 @@ Pre-configured experiment templates are provided in `robomimic/exps/templates/`:
 
 Task-specific configs are available under `egg_boiler/`, `water_bottle/`, `usb_insertion/`, and `twisty_connector/` subdirectories.
 
-## Supported Algorithms
-
-| Algorithm | Description |
-|-----------|-------------|
-| BC | Behavioral Cloning |
-| Diffusion Policy | Denoising diffusion for action generation |
-| BCQ | Batch-Constrained Q-Learning |
-| CQL | Conservative Q-Learning |
-| IQL | Implicit Q-Learning |
-| TD3-BC | TD3 + Behavioral Cloning |
-| GL | Goal Learning |
-| HBC | Hierarchical BC |
-| IRIS | Implicit Reinforcement without Interaction at Scale |
 
 ## Acknowledgements
 
